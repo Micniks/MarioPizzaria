@@ -8,7 +8,7 @@ import presentation.UI;
 import java.util.ArrayList;
 
 /**
- *@author Michael N. Korsgaard
+ * @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
  * @author Oscar Laurberg
@@ -35,22 +35,37 @@ public class Controller {
     }
 
     public void newOrder() {
-        //indlæs pizzanr
+        /*  OLD CODE
         int pizzaNumber = ui.selectPizza();
-
-        //opret bestilling
         Order order = new Order(menu.get(pizzaNumber - 1), currentOrderNr);
-
-        //tilføj bestilling til ordreliste
         activeOrders.add(order);
-
-        //vis ordrenummer på skærm
         ui.displayOrderNumber(currentOrderNr);
-
-        //vis pizzavalg
         ui.showPizzaSelection((order.getPizza().toString()));
-
-        //tæl orderNummer op
+        currentOrderNr++;
+        
+         */
+        //Opret pizza-ordre
+        Order order = new Order (currentOrderNr);
+        Boolean morePizza = true;
+        
+        do{
+        //vælg pizza at bestille
+        int pizzaNumber = ui.selectPizza();
+        Pizza pizza = menu.get(pizzaNumber - 1);
+        
+        //vælg hvor mange af pizzaen der skal tilføjes
+        int pizzaAmount = ui.selectPizzaAmount();
+        for (int i = 0; i < pizzaAmount; i++) {
+            order.addPizza(pizza);
+        }
+        
+        //vælg om der skal bestilles andre pizzaer
+        morePizza = ui.selectMorePizza();
+        } while (morePizza);
+        activeOrders.add(order);
+        System.out.println(activeOrders.size());
+        ui.displayOrderNumber(currentOrderNr);
+        ui.showPizzaListSelection((order.getPizzaList()));
         currentOrderNr++;
 
     }

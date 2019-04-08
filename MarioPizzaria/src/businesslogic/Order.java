@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Order {
     
     //  NEW CODE:   PizzaArray to make a order contain more pizzas
-    //  private ArrayList<Pizza> pizzaList;
     
+    private ArrayList<Pizza> pizzaList;
     private Pizza pizza;
     private int orderNumber;
     
@@ -24,8 +24,21 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
+    public Order(int orderNumber) {
+        this.orderNumber = orderNumber;
+        this.pizzaList = new ArrayList();
+    }
+    
+    public void addPizza(Pizza pizza){
+        pizzaList.add(pizza);
+    }
+
     public Pizza getPizza() {
         return pizza;
+    }
+
+    public ArrayList<Pizza> getPizzaList() {
+        return pizzaList;
     }
 
     public int getOrderNumber() {
@@ -34,7 +47,12 @@ public class Order {
     
     @Override
     public String toString() {
-        return "OrdreNummer: " + orderNumber + "\n" + pizza;
+        StringBuilder SB = new StringBuilder();
+        SB.append("OrdreNummer: " + orderNumber + "\n");
+        for (Pizza pizza : pizzaList){
+            SB.append(pizza);
+        }
+        return SB.toString();
     }
     
     

@@ -106,4 +106,29 @@ public class SystemUI implements UI {
         System.out.println("");
 
     }
+
+    @Override
+    public int selectPizzaAmount() {
+        System.out.println("Skriv hvor mange af pizzaen kunde har bestilt: ");
+        int pizzaAmount = scan.nextInt();
+        scan.nextLine();
+        return pizzaAmount;
+    }
+
+    @Override
+    public Boolean selectMorePizza() {
+        System.out.println("Har kunden bestilt flere pizzaer?: ");
+        System.out.println("1. Ja");
+        System.out.println("2. Nej");
+        int morePizza = scan.nextInt();
+        scan.nextLine();
+        return morePizza == 1;
+    }
+
+    @Override
+    public void showPizzaListSelection(ArrayList<Pizza> pizzaList) {
+        for (Pizza pizza : pizzaList){
+            System.out.println(pizza);
+        }
+    }
 }

@@ -24,7 +24,9 @@ public interface UI {
     public void displayHistory(ArrayList<String> læsHistorik);
     public int selectOrder();
     public void pressAnyKey();
-
     public void displayOrders(Order bestilling);
+    public int selectPizzaAmount();
+    public Boolean selectMorePizza();
+    public void showPizzaListSelection(ArrayList<Pizza> pizzaList);
     
 }

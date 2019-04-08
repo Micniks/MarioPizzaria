@@ -86,4 +86,19 @@ public class FakeUI implements UI {
         output.add(order.toString());
     }
 
+    @Override
+    public int selectPizzaAmount() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean selectMorePizza() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void showPizzaListSelection(ArrayList<Pizza> pizzaList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
