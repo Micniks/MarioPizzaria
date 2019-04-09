@@ -7,6 +7,7 @@ package businesslogic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 /**
@@ -24,5 +25,12 @@ public class DBFacade{
     
     public void insert(String values, String table, String columns) throws SQLException{
         statement.executeUpdate("INSERT INTO " + table + " " + columns + " VALUES " + values);
+    }
+    public void select(String table) throws SQLException{
+        ResultSet result = statement.executeQuery("SELECT * FROM " + table);
+        while (result.next()){
+            int r = result.getInt(2);
+            System.out.println(r);
+        }
     }
 }
