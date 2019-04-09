@@ -24,10 +24,11 @@ public class Main {
         Menu menu = new Menu();
         UI ui = new SystemUI();
         Controller ctrl = new Controller(ui, menu.getMenu());
-        ctrl.start();
+//        ctrl.start();
         
         DBFacade db = new DBFacade();
-        db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
+       db.insertOrders("33", "Orders", "OrderPrice");
+//        db.select("Pizza");
 
         /*     Til DatabaseFacade
         String user = "root";

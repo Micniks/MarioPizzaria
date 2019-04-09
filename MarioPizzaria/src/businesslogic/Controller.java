@@ -84,7 +84,7 @@ public class Controller {
 
     }
 
-    public void start() {
+    public void start() throws SQLException {
         boolean quit = false;
         do {
             ui.displayMainMenu();
@@ -118,14 +118,14 @@ public class Controller {
 
     }
 
-    public void finishOrder() {
+    public void finishOrder() throws SQLException{
         Order currentOrdre = null;
         int index = 0;
         int ordreNummer = ui.selectOrder();
         boolean temp = true;
         ArrayList<Pizza> tempList = activeOrders.get(index).getPizzaList();
         int[] qtyList = new int[menu.size()];
-        try {
+//        try {
             while (temp) {
                 if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
                     //læg i historik
@@ -136,10 +136,10 @@ public class Controller {
                         price = +pizza.getPrice();
                         qtyList[pizza.getPizzaNumber() - 1]++;
                     }
-                    db.insert(Double.toString(price), "orders", "");
+                    db.insertOrders(Double.toString(price), "orders", "");
                     for (Pizza pizza : tempList) {
                         if (qtyList[pizza.getPizzaNumber()] > 0) {
-                            db.insert("('" + Integer.toString(qtyList[pizza.getPizzaNumber()-1]) + "')", "pizza_orders", "PizzaNo");
+                            db.insertPizzaOrders(activeOrders.get(index));
                             //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
                         }
                     }
@@ -152,9 +152,9 @@ public class Controller {
                 }
             }
 
-       } catch (Exception e) {
-            System.out.println("Du indstastede ikke et aktivt ordrenummer.\n Du returneres nu til hovedmenuen.");
-        }
+//       } catch (Exception e) {
+//            System.out.println("Du indstastede ikke et aktivt ordrenummer.\n Du returneres nu til hovedmenuen.");
+        
     }
 
     public void displayHistory() {

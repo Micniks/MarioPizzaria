@@ -17,14 +17,28 @@ import java.sql.Statement;
 public class DBFacade{
     private final Connection connect;
     private Statement statement;
+    private StringBuilder sb;
     
     public DBFacade() throws SQLException{
         connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza", "root", "1234");
         statement = connect.createStatement();
+        sb = new StringBuilder();
     }
     
-    public void insert(String values, String table, String columns) throws SQLException{
-        statement.executeUpdate("INSERT INTO " + table + " " + columns + " VALUES " + values);
+    public void insertOrders(String values, String table, String columns) throws SQLException{
+        
+//        System.out.println("INSERT INTO " + table + " " + columns + " VALUES " + values);
+//        statement.executeUpdate("INSERT INTO " + table + " " + columns + " VALUES (" + values + ")");
+        sb.append("INSERT INTO ");
+        sb.append(table);
+        sb.append("(");
+        sb.append(columns);
+        sb.append(") VALUES");
+        sb.append("(");
+        sb.append(values);
+        sb.append(")");
+        statement.executeUpdate(sb.toString());
+        
     }
     public void select(String table) throws SQLException{
         ResultSet result = statement.executeQuery("SELECT * FROM " + table);
@@ -32,5 +46,17 @@ public class DBFacade{
             String s = result.getString(1);
             System.out.println(s);
         }
+    }
+
+    void insertPizzaOrders(String table, String values, String columns) throws SQLException {
+        sb.append("INSERT INTO ");
+        sb.append(table);
+        sb.append("(");
+        sb.append(columns);
+        sb.append(") VALUES");
+        sb.append("('");
+        sb.append(values);
+        sb.append("')");
+        statement.executeUpdate(sb.toString());
     }
 }
