@@ -32,7 +32,7 @@ public class Controller {
         file = new FileFacade();
         db = new DBFacade();
     }
-    
+
     public String getName() {
         return name;
     }
@@ -123,13 +123,28 @@ public class Controller {
         int index = 0;
         int ordreNummer = ui.selectOrder();
         boolean temp = true;
+        ArrayList<Pizza> tempList = activeOrders.get(index).getPizzaList();
+        int[] qtyList = new int[menu.size()];
         try {
             while (temp) {
                 if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
                     //læg i historik
                     //file.archiveOrder(activeOrders.get(index));
-                    db.insert(, name, name);
+                    double price = 0;
+                    int qty = 0;
+                    for (Pizza pizza : tempList) {
+                        price = +pizza.getPrice();
+                        qtyList[pizza.getPizzaNumber() - 1]++;
+                    }
+                    db.insert(Double.toString(price), "orders", "");
+                    for (Pizza pizza : tempList) {
+                        if (qtyList[pizza.getPizzaNumber()] > 0) {
+                            db.insert("('" + Integer.toString(qtyList[pizza.getPizzaNumber()-1]) + "')", "pizza_orders", "PizzaNo");
+                            //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
+                        }
+                    }
                     activeOrders.remove(index);
+
                     temp = false;
 
                 } else {
@@ -137,7 +152,7 @@ public class Controller {
                 }
             }
 
-        } catch (Exception e) {
+       } catch (Exception e) {
             System.out.println("Du indstastede ikke et aktivt ordrenummer.\n Du returneres nu til hovedmenuen.");
         }
     }
