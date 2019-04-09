@@ -36,8 +36,8 @@ public class SystemUI implements UI {
 
     @Override
     public void displayOrderNumber(int orderNumber) {
-        System.out.println("Ordrernummeret er: " + orderNumber +"\n");
-        pressAnyKey();
+        newLines();
+        System.out.println("Ordrernummeret er: " + orderNumber + "\n");
     }
 
     @Override
@@ -122,13 +122,15 @@ public class SystemUI implements UI {
         System.out.println("2. Nej");
         int morePizza = scan.nextInt();
         scan.nextLine();
+        
         return morePizza == 1;
     }
 
     @Override
     public void showPizzaListSelection(ArrayList<Pizza> pizzaList) {
-        for (Pizza pizza : pizzaList){
+        for (Pizza pizza : pizzaList) {
             System.out.println(pizza);
         }
+        pressAnyKey();
     }
 }
