@@ -1,6 +1,7 @@
 package main;
 
 import businesslogic.Controller;
+import businesslogic.DBFacade;
 import businesslogic.Menu;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,6 +25,9 @@ public class Main {
         UI ui = new SystemUI();
         Controller ctrl = new Controller(ui, menu.getMenu());
         ctrl.start();
+        
+        DBFacade db = new DBFacade();
+        db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
 
         /*     Til DatabaseFacade
         String user = "root";
