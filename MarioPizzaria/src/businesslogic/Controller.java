@@ -47,7 +47,7 @@ public class Controller {
         //Opret pizza-ordre
         Order order = new Order (currentOrderNr);
         Boolean morePizza = true;
-        
+        try{
         do{
         //vælg pizza at bestille
         int pizzaNumber = ui.selectPizza();
@@ -68,6 +68,9 @@ public class Controller {
         ui.showPizzaListSelection((order.getPizzaList()));
         currentOrderNr++;
 
+    }catch (Exception e){
+            System.out.println("Du indtastede ikke et gældende pizzanummer. Du returneres nu til hovedmenuen.");
+    }
     }
 
     public ArrayList<Order> getActiveOrders() {
@@ -113,12 +116,12 @@ public class Controller {
 
     }
 
-    public void finishOrder() {
+       public void finishOrder() {
         Order currentOrdre = null;
         int index = 0;
         int ordreNummer = ui.selectOrder();
         boolean temp = true;
-        //Fix me: der mangler en måde at catche et forkert input
+        try {
         while (temp) {
             if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
                 //læg i historik
@@ -131,6 +134,9 @@ public class Controller {
             }
         }
 
+    }catch (Exception e){
+            System.out.println("Du indstastede ikke et aktivt ordrenummer.\n Du returneres nu til hovedmenuen.");
+    }
     }
 
     public void displayHistory() {
@@ -143,6 +149,7 @@ public class Controller {
         int orderNumber = ui.selectOrder();
 
         boolean temp = true;
+        try{
         while (temp) {
             if (activeOrders.get(index).getOrderNumber() == orderNumber) {
                 activeOrders.remove(index);
@@ -150,6 +157,9 @@ public class Controller {
             } else {
                 index++;
             }
+        }
+        }catch (Exception e){
+            System.out.println("Du indtastede ikke et aktivt ordrenummer.\nDu returneres til hovedmenuen.");
         }
     }
 
