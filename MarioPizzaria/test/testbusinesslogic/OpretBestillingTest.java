@@ -3,6 +3,7 @@ package testbusinesslogic;
 import businesslogic.Pizza;
 import presentation.FakeUI;
 import businesslogic.Controller;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,7 +18,7 @@ import presentation.UI;
 public class OpretBestillingTest {
 
     @Test
-    public void opretBestillingEnPizza() {
+    public void opretBestillingEnPizza() throws SQLException {
         ArrayList<Pizza> menukort = new ArrayList();
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
@@ -41,7 +42,7 @@ public class OpretBestillingTest {
     }
 
     @Test
-    public void opretBestillingToAfSammePizza() {
+    public void opretBestillingToAfSammePizza() throws SQLException {
         ArrayList<Pizza> menukort = new ArrayList();
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
@@ -66,7 +67,7 @@ public class OpretBestillingTest {
     }
 
     @Test
-    public void opretBestillingToForskelligePizza() {
+    public void opretBestillingToForskelligePizza() throws SQLException {
         ArrayList<Pizza> menukort = new ArrayList();
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
@@ -94,7 +95,7 @@ public class OpretBestillingTest {
     }
 
     @Test
-    public void opretToBestillingerAfEnPizza() {
+    public void opretToBestillingerAfEnPizza() throws SQLException {
         ArrayList<Pizza> menukort = new ArrayList();
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
