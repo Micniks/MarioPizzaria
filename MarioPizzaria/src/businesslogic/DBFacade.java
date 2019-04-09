@@ -29,8 +29,8 @@ public class DBFacade{
     public void select(String table) throws SQLException{
         ResultSet result = statement.executeQuery("SELECT * FROM " + table);
         while (result.next()){
-            int r = result.getInt(2);
-            System.out.println(r);
+            String s = result.getString(1);
+            System.out.println(s);
         }
     }
 }
