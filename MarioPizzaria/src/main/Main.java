@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import presentation.SystemUI;
 import presentation.UI;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,10 +25,13 @@ public class Main {
         Menu menu = new Menu();
         UI ui = new SystemUI();
         Controller ctrl = new Controller(ui, menu.getMenu());
-//        ctrl.start();
+        ctrl.start();
         
-        DBFacade db = new DBFacade();
-       db.insertOrders("33", "Orders", "OrderPrice");
+        //DBFacade db = new DBFacade();
+        //ArrayList test = db.readPizzaQtyFromDatabase();
+        //System.out.println(test.get(2));
+        //System.out.println(test.get(3));
+       //db.insertOrders("33", "Orders", "OrderPrice");
 //        db.select("Pizza");
 
         /*     Til DatabaseFacade

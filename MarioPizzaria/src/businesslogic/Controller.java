@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import presentation.UI;
 import java.util.ArrayList;
@@ -133,13 +134,13 @@ public class Controller {
                     double price = 0;
                     int qty = 0;
                     for (Pizza pizza : tempList) {
-                        price = +pizza.getPrice();
+                        price += pizza.getPrice();
                         qtyList[pizza.getPizzaNumber() - 1]++;
                     }
-                    db.insertOrders(Double.toString(price), "orders", "");
+                    db.insertOrders(activeOrders.get(index), price);
                     for (Pizza pizza : tempList) {
-                        if (qtyList[pizza.getPizzaNumber()] > 0) {
-                            db.insertPizzaOrders(activeOrders.get(index));
+                        if (qtyList[pizza.getPizzaNumber()-1] > 0) {
+                            db.insertPizzaOrders(activeOrders.get(index),pizza,qtyList[pizza.getPizzaNumber()-1] );
                             //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
                         }
                     }
@@ -152,11 +153,8 @@ public class Controller {
                 }
             }
 
-//       } catch (Exception e) {
-//            System.out.println("Du indstastede ikke et aktivt ordrenummer.\n Du returneres nu til hovedmenuen.");
-        
     }
-
+    
     public void displayHistory() {
         ui.displayHistory(file.readHistory());
         ui.pressAnyKey();
