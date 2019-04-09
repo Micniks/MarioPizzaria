@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import presentation.UI;
 import java.util.ArrayList;
 
@@ -21,15 +22,17 @@ public class Controller {
     private ArrayList<Order> activeOrders;
     private int currentOrderNr;
     private FileFacade file;
+    private DBFacade db;
 
-    public Controller(UI ui, ArrayList<Pizza> menu) {
+    public Controller(UI ui, ArrayList<Pizza> menu) throws SQLException {
         this.menu = menu;
         this.ui = ui;
         activeOrders = new ArrayList<Order>();
         currentOrderNr = 1;
         file = new FileFacade();
+        db = new DBFacade();
     }
-
+    
     public String getName() {
         return name;
     }
@@ -124,7 +127,8 @@ public class Controller {
             while (temp) {
                 if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
                     //læg i historik
-                    file.archiveOrder(activeOrders.get(index));
+                    //file.archiveOrder(activeOrders.get(index));
+                    db.insert(, name, name);
                     activeOrders.remove(index);
                     temp = false;
 
