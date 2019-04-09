@@ -23,7 +23,7 @@ public class FakeUI implements UI {
 
     @Override
     public int selectPizza() {
-        output.add("Skriv hvilket pizzanummer kunden har bestilt");
+        output.add("Skriv hvilket pizzanummer kunden har bestilt: ");
         return Integer.parseInt(input[index++]);
     }
 
@@ -33,8 +33,10 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void displayOrderNumber(int ordreNummer) {
-        output.add("" + ordreNummer);
+    public void displayOrderNumber(int orderNumber) {
+        newLines();
+        output.add("Ordrernummeret er: " + orderNumber);
+        output.add("");
     }
 
     @Override
@@ -43,11 +45,13 @@ public class FakeUI implements UI {
         for (Pizza pizza : menukort) {
             output.add(pizza.toString());
         }
+        pressAnyKey();
 
     }
 
     @Override
     public void displayMainMenu() {
+        newLines();
         output.add("Vælg en af følgende muligheder:");
         output.add("1. Vis menu");
         output.add("2. Opret bestilling");
@@ -73,11 +77,14 @@ public class FakeUI implements UI {
 
     @Override
     public int selectOrder() {
+        newLines();
+        output.add("Indtast ordrenummer på den ordre du vil afslutte: ");
         return Integer.parseInt(input[index++]);
     }
 
     @Override
     public void pressAnyKey() {
+        output.add("Press any key to return to the main menu.");
         String temp = input[index++];
     }
 
@@ -88,17 +95,32 @@ public class FakeUI implements UI {
 
     @Override
     public int selectPizzaAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Skriv hvor mange af pizzaen kunde har bestilt: ");
+        return Integer.parseInt(input[index++]);
     }
 
     @Override
     public Boolean selectMorePizza() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Har kunden bestilt flere pizzaer?: ");
+        output.add("1. Ja");
+        output.add("2. Nej");
+        return Integer.parseInt(input[index++]) == 1;
     }
 
     @Override
     public void showPizzaListSelection(ArrayList<Pizza> pizzaList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Pizza pizza : pizzaList) {
+            output.add(pizza.toString());
+        }
+        pressAnyKey();
+    }
+
+    private void newLines() {
+        output.add("");
+        output.add("");
+        output.add("");
+        output.add("");
+        output.add("");
     }
 
 }
