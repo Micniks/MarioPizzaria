@@ -45,32 +45,31 @@ public class Controller {
         
          */
         //Opret pizza-ordre
-        Order order = new Order (currentOrderNr);
+        Order order = new Order(currentOrderNr);
         Boolean morePizza = true;
-        try{
-        do{
-        //vælg pizza at bestille
-        int pizzaNumber = ui.selectPizza();
-        Pizza pizza = menu.get(pizzaNumber - 1);
-        
-        //vælg hvor mange af pizzaen der skal tilføjes
-        int pizzaAmount = ui.selectPizzaAmount();
-        for (int i = 0; i < pizzaAmount; i++) {
-            order.addPizza(pizza);
-        }
-        
-        //vælg om der skal bestilles andre pizzaer
-        morePizza = ui.selectMorePizza();
-        } while (morePizza);
-        activeOrders.add(order);
-        System.out.println(activeOrders.size());
-        ui.displayOrderNumber(currentOrderNr);
-        ui.showPizzaListSelection((order.getPizzaList()));
-        currentOrderNr++;
+        try {
+            do {
+                //vælg pizza at bestille
+                int pizzaNumber = ui.selectPizza();
+                Pizza pizza = menu.get(pizzaNumber - 1);
 
-    }catch (Exception e){
+                //vælg hvor mange af pizzaen der skal tilføjes
+                int pizzaAmount = ui.selectPizzaAmount();
+                for (int i = 0; i < pizzaAmount; i++) {
+                    order.addPizza(pizza);
+                }
+
+                //vælg om der skal bestilles andre pizzaer
+                morePizza = ui.selectMorePizza();
+            } while (morePizza);
+            activeOrders.add(order);
+            ui.displayOrderNumber(currentOrderNr);
+            ui.showPizzaListSelection((order.getPizzaList()));
+            currentOrderNr++;
+
+        } catch (Exception e) {
             System.out.println("Du indtastede ikke et gældende pizzanummer. Du returneres nu til hovedmenuen.");
-    }
+        }
     }
 
     public ArrayList<Order> getActiveOrders() {
@@ -116,27 +115,27 @@ public class Controller {
 
     }
 
-       public void finishOrder() {
+    public void finishOrder() {
         Order currentOrdre = null;
         int index = 0;
         int ordreNummer = ui.selectOrder();
         boolean temp = true;
         try {
-        while (temp) {
-            if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
-                //læg i historik
-                file.archiveOrder(activeOrders.get(index));
-                activeOrders.remove(index);
-                temp = false;
+            while (temp) {
+                if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
+                    //læg i historik
+                    file.archiveOrder(activeOrders.get(index));
+                    activeOrders.remove(index);
+                    temp = false;
 
-            } else {
-                index++;
+                } else {
+                    index++;
+                }
             }
-        }
 
-    }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Du indstastede ikke et aktivt ordrenummer.\n Du returneres nu til hovedmenuen.");
-    }
+        }
     }
 
     public void displayHistory() {
@@ -149,16 +148,16 @@ public class Controller {
         int orderNumber = ui.selectOrder();
 
         boolean temp = true;
-        try{
-        while (temp) {
-            if (activeOrders.get(index).getOrderNumber() == orderNumber) {
-                activeOrders.remove(index);
-                temp = false;
-            } else {
-                index++;
+        try {
+            while (temp) {
+                if (activeOrders.get(index).getOrderNumber() == orderNumber) {
+                    activeOrders.remove(index);
+                    temp = false;
+                } else {
+                    index++;
+                }
             }
-        }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Du indtastede ikke et aktivt ordrenummer.\nDu returneres til hovedmenuen.");
         }
     }
