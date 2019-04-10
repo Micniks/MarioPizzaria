@@ -122,7 +122,7 @@ public class SystemUI implements UI {
         System.out.println("2. Nej");
         int morePizza = scan.nextInt();
         scan.nextLine();
-        
+
         return morePizza == 1;
     }
 

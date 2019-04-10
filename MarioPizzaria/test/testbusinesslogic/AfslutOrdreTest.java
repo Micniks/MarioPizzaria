@@ -14,7 +14,7 @@ import presentation.FakeUI;
  * @author Michael N. Korsgaard
  */
 public class AfslutOrdreTest {
-    
+
     @Test
     public void testÁfslutOrdre() throws SQLException {
         //arrange
