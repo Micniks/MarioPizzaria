@@ -31,6 +31,7 @@ public class AfslutOrdreTest {
         assertTrue(ctrl.getActiveOrders().size() == 1);
         ctrl.finishOrder();
 
+        
         //assume
         assertTrue(ctrl.getActiveOrders().isEmpty());
     }
