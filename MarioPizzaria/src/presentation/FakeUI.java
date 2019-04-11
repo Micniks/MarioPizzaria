@@ -6,7 +6,7 @@ import presentation.UI;
 import java.util.ArrayList;
 
 /**
- *@author Michael N. Korsgaard
+ * @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
  * @author Oscar Laurberg
@@ -59,7 +59,8 @@ public class FakeUI implements UI {
         output.add("4. Afslut bestilling");
         output.add("5. Annullere en bestilling");
         output.add("6. Se Historik");
-        output.add("7. Afslut program");
+        output.add("7. Vis statistik");
+        output.add("8. Afslut program");
     }
 
     @Override
@@ -125,22 +126,26 @@ public class FakeUI implements UI {
 
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Skriv venligst kodeordet til databasen.");
+        return input[index++];
     }
 
     @Override
     public void cancelOrderMsg(Order order) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Du har annulleret " + order);
     }
 
     @Override
     public int askFacade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Skal data gemmes i:");
+        output.add("1. Database");
+        output.add("2. Fil");
+        return Integer.parseInt(input[index++]);
     }
 
     @Override
     public void showStatistics(String readStatistics) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add(readStatistics);
     }
 
-    }
+}

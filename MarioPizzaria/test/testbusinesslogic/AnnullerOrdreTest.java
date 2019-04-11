@@ -3,6 +3,7 @@ package testbusinesslogic;
 
 import businesslogic.Controller;
 import businesslogic.DBFacade;
+import businesslogic.FakeFacade;
 import businesslogic.Pizza;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,15 +27,14 @@ public class AnnullerOrdreTest {
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
-        String[] input = {"1","2","3"};
+        String[] input = {"1", "1", "2", "AnyKey", "1"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui.getPassword());
+        FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, menukort, db);
         
         //act
         ctrl.newOrder();
         ctrl.cancelOrder();
-        ctrl.displayHistory();
         
         //assert
         assertTrue(ctrl.getActiveOrders().isEmpty()); 

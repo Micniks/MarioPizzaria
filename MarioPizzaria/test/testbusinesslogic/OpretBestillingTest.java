@@ -4,6 +4,7 @@ import businesslogic.Pizza;
 import presentation.FakeUI;
 import businesslogic.Controller;
 import businesslogic.DBFacade;
+import businesslogic.FakeFacade;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui.getPassword());
+        FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, menukort, db);
 
         //act
@@ -51,7 +52,7 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "2", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui.getPassword());
+        FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, menukort, db);
 
         //act
@@ -77,7 +78,7 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "1", "1", "1", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui.getPassword());
+        FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, menukort, db);
 
         //act
@@ -106,7 +107,7 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "2", "Anykey", "1", "1", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui.getPassword());
+        FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, menukort, db);
 
         //act

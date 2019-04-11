@@ -2,6 +2,7 @@ package testbusinesslogic;
 
 import businesslogic.Controller;
 import businesslogic.DBFacade;
+import businesslogic.FakeFacade;
 import businesslogic.Pizza;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ public class ControllerStartTest {
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
-        String[] input = {"1", "AnyKey", "7"};
+        String[] input = {"1", "AnyKey", "8"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui.getPassword());
+        FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, menukort, db);
 
         //act
@@ -40,12 +41,13 @@ public class ControllerStartTest {
         assertTrue(ui.output.get(9).contains("4. Afslut bestilling"));
         assertTrue(ui.output.get(10).contains("5. Annullere en bestilling"));
         assertTrue(ui.output.get(11).contains("6. Se Historik"));
-        assertTrue(ui.output.get(12).contains("7. Afslut program"));
-        assertTrue(ui.output.get(13).contains("Vesuvio"));
-        assertTrue(ui.output.get(14).contains("Amerikaner"));
-        assertTrue(ui.output.get(15).contains("Cacciatore"));
-        assertTrue(ui.output.get(16).contains("Press any key to return to the main menu"));
-        assertTrue(ui.output.get(22).contains("Vælg en af følgende muligheder"));
+        assertTrue(ui.output.get(12).contains("7. Vis statistik"));
+        assertTrue(ui.output.get(13).contains("8. Afslut program"));
+        assertTrue(ui.output.get(14).contains("Vesuvio"));
+        assertTrue(ui.output.get(15).contains("Amerikaner"));
+        assertTrue(ui.output.get(16).contains("Cacciatore"));
+        assertTrue(ui.output.get(17).contains("Press any key to return to the main menu"));
+        assertTrue(ui.output.get(23).contains("Vælg en af følgende muligheder"));
         assertTrue(ctrl.getActiveOrders().isEmpty());
     }
 
