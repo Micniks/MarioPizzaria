@@ -3,12 +3,11 @@ package businesslogic;
 import businesslogic.Pizza;
 import java.util.ArrayList;
 
-/**
- *@author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurblad*/ 
+
 public class Menu {
 
     ArrayList<Pizza> menu = new ArrayList();
@@ -35,6 +34,4 @@ public class Menu {
         return menu;
     }
 
-    
-    
 }

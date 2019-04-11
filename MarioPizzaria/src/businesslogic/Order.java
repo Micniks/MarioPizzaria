@@ -1,24 +1,19 @@
-
 package businesslogic;
 
 import java.util.ArrayList;
 
-/**
- *@author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurblad*/
+
 public class Order {
-    
-    //  NEW CODE:   PizzaArray to make a order contain more pizzas
-    
+
     private ArrayList<Pizza> pizzaList;
     private Pizza pizza;
     private int orderNumber;
-    
-    //bestillingsnummer mangler
 
+    //bestillingsnummer mangler
     public Order(Pizza pizza, int orderNumber) {
         this.pizza = pizza;
         this.orderNumber = orderNumber;
@@ -28,8 +23,8 @@ public class Order {
         this.orderNumber = orderNumber;
         this.pizzaList = new ArrayList();
     }
-    
-    public void addPizza(Pizza pizza){
+
+    public void addPizza(Pizza pizza) {
         pizzaList.add(pizza);
     }
 
@@ -44,19 +39,16 @@ public class Order {
     public int getOrderNumber() {
         return orderNumber;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder SB = new StringBuilder();
         SB.append("OrdreNummer: " + orderNumber + "\n");
-        for (Pizza pizza : pizzaList){
+        for (Pizza pizza : pizzaList) {
             SB.append(pizza);
+
         }
         return SB.toString();
     }
-    
-    
-    
-    
-    
+
 }

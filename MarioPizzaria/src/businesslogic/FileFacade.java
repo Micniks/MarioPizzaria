@@ -12,16 +12,15 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *@author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurblad*/
+
 public class FileFacade implements Facade {
 
     File orderHistory = new File("Ordre Historik.txt");
-    FileWriter fw;  //false lader den overwrite filen hver gang programmet kører
+    FileWriter fw;
     BufferedWriter bufWriter;
     FileReader fr;
     BufferedReader bufReader;
@@ -65,22 +64,23 @@ public class FileFacade implements Facade {
         return history;
     }
 
+//Write a method to find the highest order number from the files
     @Override
     public int readHighestOrderNo() throws SQLException {
-        //Write a method to find the highest order number from the files
+
         ArrayList<String> history = readHistory();
         ArrayList<Integer> orderNumbers = new ArrayList();
-        int orderNo; 
+        int orderNo;
         int orderNumber;
-        for (String str : history){
-            if(str.contains("OrdreNummer: ")){
+        for (String str : history) {
+            if (str.contains("OrdreNummer: ")) {
                 String[] orderString;
                 orderString = str.split(" ");
                 orderNumber = Integer.parseInt(orderString[1]);
                 orderNumbers.add(orderNumber);
             }
         }
-        if (!orderNumbers.isEmpty()){
+        if (!orderNumbers.isEmpty()) {
             orderNo = (int) Collections.max(orderNumbers);
             orderNo++;
         } else {

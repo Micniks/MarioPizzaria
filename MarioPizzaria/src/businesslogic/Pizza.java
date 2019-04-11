@@ -1,11 +1,10 @@
 package businesslogic;
 
-/**
- *@author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurblad*/
+
 public class Pizza {
 
     private int pizzaNumber;
@@ -34,7 +33,7 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return pizzaNumber + ". " + pizzaName + ", Pris DKK:" + price +"\n" + ingredients + " \n";
+        return pizzaNumber + ". " + pizzaName + ", Pris DKK:" + price + "\n" + ingredients + " \n";
     }
 
 }
