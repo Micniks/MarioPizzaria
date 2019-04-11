@@ -17,7 +17,7 @@ import java.util.Collections;
  *
  * @author Jens, Michael, Nicolai, Oscar
  */
-public class DBFacade {
+public class DBFacade implements Facade {
 
     private final Connection connect;
     private Statement statement;
@@ -37,36 +37,47 @@ public class DBFacade {
     public void insertOrders(Order order, double orderPrice) throws SQLException {
         StringBuilder sb = new StringBuilder();
 
-//        System.out.println("INSERT INTO " + table + " " + columns + " VALUES " + values);
-//        statement.executeUpdate("INSERT INTO " + table + " " + columns + " VALUES (" + values + ")");
         sb.append("INSERT INTO Orders (OrderNo, OrderPrice) VALUES (");
         sb.append(order.getOrderNumber());
         sb.append(",");
         sb.append(orderPrice);
         sb.append(")");
 
-//        sb.append("INSERT INTO ");
-//        sb.append(table);
-//        sb.append("(");
-//        sb.append(columns);
-//        sb.append(") VALUES");
-//        sb.append("(");
-//        sb.append(values);
-//        sb.append(")");
-//String values, String table, String columns
         statement.executeUpdate(sb.toString());
-
     }
 
-    public void select(String table) throws SQLException {
-        ResultSet result = statement.executeQuery("SELECT * FROM " + table);
-        while (result.next()) {
-            String s = result.getString(1);
-            System.out.println(s);
+    @Override
+    public void archiveOrder(Order order) throws SQLException {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Pizza> tempList = order.getPizzaList();
+
+        int[] qtyList = new int[30];
+
+        double orderPrice = 0;
+        int qty = 0;
+        for (Pizza pizza : tempList) {
+            orderPrice += pizza.getPrice();
+            qtyList[pizza.getPizzaNumber() - 1]++;
+        }
+
+        sb.append("INSERT INTO Orders (OrderNo, OrderPrice) VALUES (");
+        sb.append(order.getOrderNumber());
+        sb.append(",");
+        sb.append(orderPrice);
+        sb.append(")");
+
+        statement.executeUpdate(sb.toString());
+
+        for (Pizza pizza : tempList) {
+            if (qtyList[pizza.getPizzaNumber() - 1] > 0) {
+                insertPizzaOrders(order, pizza, qtyList[pizza.getPizzaNumber() - 1]);
+                qtyList[pizza.getPizzaNumber() - 1] = 0;
+                //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
+            }
         }
     }
 
-    void insertPizzaOrders(Order order, Pizza pizza, int qty) throws SQLException {
+    public void insertPizzaOrders(Order order, Pizza pizza, int qty) throws SQLException {
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO pizza_orders (OrderNo, PizzaNo, Quantity) VALUES (");
         sb.append(order.getOrderNumber());
@@ -78,37 +89,24 @@ public class DBFacade {
         statement.executeUpdate(sb.toString());
     }
 
-    public ArrayList readOrderPriceFromDatabase() throws SQLException {
-        ArrayList al = new ArrayList();
-        ResultSet result = statement.executeQuery("SELECT * FROM Orders");
-        while (result.next()) {
-            al.add(result.getDouble("OrderPrice"));
-        }
-        return al;
-    }
-
-    public ArrayList readPizzaQtyFromDatabase() throws SQLException {
-        ArrayList al = new ArrayList();
-        ResultSet result = statement.executeQuery("SELECT * FROM pizza_orders");
-        while (result.next()) {
-            al.add(result.getInt("PizzaNo"));
-            al.add(result.getInt("Quantity"));
-        }
-        return al;
-    }
-
     public int readHighestOrderNo() throws SQLException {
         ArrayList temp = new ArrayList();
+        int highestOrderNo = 0;
         ResultSet result = statement.executeQuery("SELECT * from Orders");
         while (result.next()) {
             temp.add(result.getInt("OrderNo"));
         }
-        int highestOrderNo = (int) Collections.max(temp);
-        highestOrderNo++;
+        if (temp.size() != 0) {
+            highestOrderNo = (int) Collections.max(temp);
+            highestOrderNo++;
+        } else {
+            highestOrderNo = 1;
+        }
         return highestOrderNo;
 
     }
 
+    @Override
     public ArrayList<String> readHistory() throws SQLException {
         int currentOrderNo;
         ArrayList<String> history = new ArrayList();
@@ -125,14 +123,14 @@ public class DBFacade {
             pizzaQty.add(resultPizzaOrders.getInt("Quantity"));
 
         }
-       
+
         ResultSet resultPizza = statement.executeQuery("SELECT * FROM pizza");
         ArrayList pizzanavn = new ArrayList();
         while (resultPizza.next()) {
             pizzanavn.add(resultPizza.getString("PizzaName"));
 
         }
-       
+
         ResultSet resultOrders = statement.executeQuery("SELECT * FROM orders");
         while (resultOrders.next()) {
             sb.append("ordrenummer: ");

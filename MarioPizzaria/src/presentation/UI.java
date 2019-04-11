@@ -30,5 +30,6 @@ public interface UI {
     public void showPizzaListSelection(ArrayList<Pizza> pizzaList);
     public void cancelOrderMsg(Order order);
     public String getPassword();
+    public int askFacade();
     
 }

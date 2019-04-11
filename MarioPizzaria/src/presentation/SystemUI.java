@@ -145,5 +145,16 @@ public class SystemUI implements UI {
     public void cancelOrderMsg(Order order) {
         System.out.println("Du har annulleret " + order);
     }
+
+    @Override
+    public int askFacade() {
+        int answer = 0;
+        System.out.println("Skal data gemmes i:");
+        System.out.println("1. Database");
+        System.out.println("2. Fil");
+        answer = scan.nextInt();
+        scan.nextLine();
+        return answer;
+    }
     
 }

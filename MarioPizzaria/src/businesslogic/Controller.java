@@ -23,14 +23,14 @@ public class Controller {
     private ArrayList<Order> activeOrders;
     private int currentOrderNr;
     private FileFacade file;
-    private DBFacade db;
+    private Facade facade;
 
-    public Controller(UI ui, ArrayList<Pizza> menu, DBFacade db) throws SQLException {
+    public Controller(UI ui, ArrayList<Pizza> menu, Facade facade) throws SQLException {
         this.menu = menu;
         this.ui = ui;
-        this.db = db;
+        this.facade = facade;
         activeOrders = new ArrayList<Order>();
-        currentOrderNr = db.readHighestOrderNo();
+        currentOrderNr = facade.readHighestOrderNo();
         file = new FileFacade();
 
     }
@@ -121,36 +121,15 @@ public class Controller {
     }
 
     public void finishOrder() throws SQLException {
-        Order currentOrdre = null;
         int index = 0;
         int ordreNummer = ui.selectOrder();
         boolean temp = true;
-        ArrayList<Pizza> tempList = activeOrders.get(index).getPizzaList();
-        int[] qtyList = new int[menu.size()];
 //        try {
         while (temp) {
             if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
-                //læg i historik
-                //file.archiveOrder(activeOrders.get(index));
-                double price = 0;
-                int qty = 0;
-                for (Pizza pizza : tempList) {
-                    price += pizza.getPrice();
-                    qtyList[pizza.getPizzaNumber() - 1]++;
-                }
-                db.insertOrders(activeOrders.get(index), price);
-                for (Pizza pizza : tempList) {
-                    if (qtyList[pizza.getPizzaNumber() - 1] > 0) {
-                        db.insertPizzaOrders(activeOrders.get(index), pizza, qtyList[pizza.getPizzaNumber() - 1]);
-                        qtyList[pizza.getPizzaNumber() - 1] = 0;
-                        //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
-                    }
-                }
-                
+                facade.archiveOrder(activeOrders.get(index));
                 activeOrders.remove(index);
-
                 temp = false;
-
             } else {
                 index++;
             }
@@ -159,7 +138,7 @@ public class Controller {
     }
 
     public void displayHistory() throws SQLException {
-        ui.displayHistory(db.readHistory());
+        ui.displayHistory(facade.readHistory());
         ui.pressAnyKey();
     }
 

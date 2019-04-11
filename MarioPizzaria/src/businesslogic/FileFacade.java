@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  * @author Jens Brønd
  * @author Oscar Laurberg
  */
-public class FileFacade {
+public class FileFacade implements Facade {
 
     File orderHistory = new File("Ordre Historik.txt");
     FileWriter fw;  //false lader den overwrite filen hver gang programmet kører
@@ -38,6 +39,7 @@ public class FileFacade {
 
     }
 
+    @Override
     public void archiveOrder(Order order) {
 
         try {
@@ -50,6 +52,7 @@ public class FileFacade {
 
     }
 
+    @Override
     public ArrayList<String> readHistory() {
         ArrayList<String> history = new ArrayList();
         try {
@@ -60,6 +63,12 @@ public class FileFacade {
             Logger.getLogger(FileFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         return history;
+    }
+
+    @Override
+    public int readHighestOrderNo() throws SQLException {
+        //Write a method to find the highest order number from the files
+        return 1;
     }
 
 }

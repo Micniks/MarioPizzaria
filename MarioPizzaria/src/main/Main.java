@@ -2,6 +2,8 @@ package main;
 
 import businesslogic.Controller;
 import businesslogic.DBFacade;
+import businesslogic.Facade;
+import businesslogic.FileFacade;
 import businesslogic.Menu;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +26,14 @@ public class Main {
 
         Menu menu = new Menu();
         UI ui = new SystemUI();
-        DBFacade facade = new DBFacade(ui.getPassword());
+        Facade facade;
+        int facadeType = ui.askFacade();
+        if (facadeType == 1){
+            facade = new DBFacade(ui.getPassword());
+        } else {
+            facade = new FileFacade();
+        }
+
         Controller ctrl = new Controller(ui, menu.getMenu(), facade);
         ctrl.start();
         
