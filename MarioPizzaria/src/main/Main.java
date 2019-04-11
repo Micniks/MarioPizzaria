@@ -24,7 +24,8 @@ public class Main {
 
         Menu menu = new Menu();
         UI ui = new SystemUI();
-        Controller ctrl = new Controller(ui, menu.getMenu());
+        DBFacade facade = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menu.getMenu(), facade);
         ctrl.start();
         
         //DBFacade db = new DBFacade();

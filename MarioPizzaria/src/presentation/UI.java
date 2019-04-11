@@ -28,5 +28,7 @@ public interface UI {
     public int selectPizzaAmount();
     public Boolean selectMorePizza();
     public void showPizzaListSelection(ArrayList<Pizza> pizzaList);
+    public void cancelOrderMsg(Order order);
+    public String getPassword();
     
 }

@@ -25,13 +25,14 @@ public class Controller {
     private FileFacade file;
     private DBFacade db;
 
-    public Controller(UI ui, ArrayList<Pizza> menu) throws SQLException {
+    public Controller(UI ui, ArrayList<Pizza> menu, DBFacade db) throws SQLException {
         this.menu = menu;
         this.ui = ui;
+        this.db = db;
         activeOrders = new ArrayList<Order>();
         currentOrderNr = 1;
         file = new FileFacade();
-        db = new DBFacade();
+
     }
 
     public String getName() {
@@ -145,6 +146,7 @@ public class Controller {
                         //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
                     }
                 }
+                
                 activeOrders.remove(index);
 
                 temp = false;
@@ -169,7 +171,7 @@ public class Controller {
         try {
             while (temp) {
                 if (activeOrders.get(index).getOrderNumber() == orderNumber) {
-                    System.out.println(activeOrders.get(index) + "er blevet annulleret");
+                    ui.cancelOrderMsg(activeOrders.get(index));
                     activeOrders.remove(index);
                     temp = false;
                 } else {

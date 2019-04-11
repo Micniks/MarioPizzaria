@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Jens
+ * @author Jens, Michael, Nicolai, Oscar
  */
 public class DBFacade {
 
@@ -22,8 +22,14 @@ public class DBFacade {
     private Statement statement;
     private String serverTime = "serverTimezone=UTC";
 
+    public DBFacade(String password) throws SQLException {
+        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza+?" + serverTime, "root", password);
+        statement = connect.createStatement();
+
+    }
+
     public DBFacade() throws SQLException {
-        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza+?"+serverTime, "root", "1234");
+        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza+?" + serverTime, "root", "1234");
         statement = connect.createStatement();
     }
 
@@ -90,4 +96,4 @@ public class DBFacade {
         return al;
     }
 
-        }
+}

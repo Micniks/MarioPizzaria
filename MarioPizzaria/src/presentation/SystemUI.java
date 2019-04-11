@@ -133,4 +133,17 @@ public class SystemUI implements UI {
         }
         pressAnyKey();
     }
+
+    @Override
+    public String getPassword() {
+        System.out.println("Skriv venligst kodeordet til databasen.");
+        String password = scan.nextLine();
+        return password;
+    }
+
+    @Override
+    public void cancelOrderMsg(Order order) {
+        System.out.println("Du har annulleret " + order);
+    }
+    
 }
