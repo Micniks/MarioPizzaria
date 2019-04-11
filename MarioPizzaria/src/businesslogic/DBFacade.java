@@ -108,4 +108,51 @@ public class DBFacade {
         return highestOrderNo;
 
     }
+
+    public ArrayList<String> readHistory() throws SQLException {
+        int currentOrderNo;
+        ArrayList<String> history = new ArrayList();
+        StringBuilder sb = new StringBuilder();
+        ResultSet resultPizzaOrders = statement.executeQuery("SELECT * from pizza_orders");
+
+        ArrayList orderNumbers = new ArrayList();
+        ArrayList pizzaNr = new ArrayList();
+        ArrayList pizzaQty = new ArrayList();
+
+        while (resultPizzaOrders.next()) {
+            orderNumbers.add(resultPizzaOrders.getInt("OrderNo"));
+            pizzaNr.add(resultPizzaOrders.getInt("PizzaNo"));
+            pizzaQty.add(resultPizzaOrders.getInt("Quantity"));
+
+        }
+       
+        ResultSet resultPizza = statement.executeQuery("SELECT * FROM pizza");
+        ArrayList pizzanavn = new ArrayList();
+        while (resultPizza.next()) {
+            pizzanavn.add(resultPizza.getString("PizzaName"));
+
+        }
+       
+        ResultSet resultOrders = statement.executeQuery("SELECT * FROM orders");
+        while (resultOrders.next()) {
+            sb.append("ordrenummer: ");
+            currentOrderNo = resultOrders.getInt("OrderNo");
+            sb.append(currentOrderNo);
+            sb.append("\n");
+            for (int i = 0; i < orderNumbers.size(); i++) {
+
+                if (orderNumbers.get(i).equals(currentOrderNo)) {
+                    sb.append(pizzaQty.get(i));
+                    sb.append(" Stk. ");
+                    sb.append(pizzanavn.get((int) pizzaNr.get(i) - 1));
+                    sb.append("\n");
+
+                }
+
+            }
+            history.add(sb.toString());
+            sb.delete(0, sb.length());
+        }
+        return history;
+    }
 }

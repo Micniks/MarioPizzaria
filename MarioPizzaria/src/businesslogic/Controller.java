@@ -158,8 +158,8 @@ public class Controller {
 
     }
 
-    public void displayHistory() {
-        ui.displayHistory(file.readHistory());
+    public void displayHistory() throws SQLException {
+        ui.displayHistory(db.readHistory());
         ui.pressAnyKey();
     }
 
