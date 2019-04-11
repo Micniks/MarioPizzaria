@@ -1,20 +1,14 @@
 package businesslogic;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import presentation.UI;
 import java.util.ArrayList;
 
-/**
- * @author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurblad*/
+
 public class Controller {
 
     private UI ui;
@@ -40,20 +34,12 @@ public class Controller {
     }
 
     public void newOrder() {
-        /*  OLD CODE
-        int pizzaNumber = ui.selectPizza();
-        Order order = new Order(menu.get(pizzaNumber - 1), currentOrderNr);
-        activeOrders.add(order);
-        ui.displayOrderNumber(currentOrderNr);
-        ui.showPizzaSelection((order.getPizza().toString()));
-        currentOrderNr++;
-        
-         */
+
         //Opret pizza-ordre
         Order order = new Order(currentOrderNr);
         Boolean morePizza = true;
-            while (morePizza) {
-                try {
+        while (morePizza) {
+            try {
                 //vælg pizza at bestille
                 int pizzaNumber = ui.selectPizza();
                 Pizza pizza = menu.get(pizzaNumber - 1);
@@ -66,16 +52,15 @@ public class Controller {
 
                 //vælg om der skal bestilles andre pizzaer
                 morePizza = ui.selectMorePizza();
-                } catch (Exception e) {
-                    System.out.println("Du indtastede ikke et gældende pizzanummer. Prøv igen.");
-                }
+            } catch (Exception e) {
+                System.out.println("Du indtastede ikke et gældende pizzanummer. Prøv igen.");
             }
-            activeOrders.add(order);
-            ui.displayOrderNumber(currentOrderNr);
-            ui.showPizzaListSelection((order.getPizzaList()));
-            currentOrderNr++;
+        }
+        activeOrders.add(order);
+        ui.displayOrderNumber(currentOrderNr);
+        ui.showPizzaListSelection((order.getPizzaList()));
+        currentOrderNr++;
 
-        
     }
 
     public ArrayList<Order> getActiveOrders() {
@@ -111,7 +96,7 @@ public class Controller {
                 case "6":
                     displayHistory();
                     break;
-                case "7": 
+                case "7":
                     displayStatistics();
                     break;
                 case "8":
@@ -128,7 +113,7 @@ public class Controller {
         int index = 0;
         int ordreNummer = ui.selectOrder();
         boolean temp = true;
-//        try {
+
         while (temp) {
             if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
                 facade.archiveOrder(activeOrders.get(index));
@@ -160,7 +145,7 @@ public class Controller {
                 } else {
                     index++;
                 }
-                
+
             }
         } catch (Exception e) {
             System.out.println("Du indtastede ikke et aktivt ordrenummer.\nDu returneres til hovedmenuen.");
