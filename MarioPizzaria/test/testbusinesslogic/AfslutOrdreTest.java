@@ -2,19 +2,18 @@ package testbusinesslogic;
 
 import businesslogic.Controller;
 import businesslogic.Pizza;
-import businesslogic.DBFacade;
 import businesslogic.FakeFacade;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
 
-/**
- *
- * @author Michael N. Korsgaard
- */
+/* @author Michael N. Korsgaard
+ * @author Nicolai Gregersen
+ * @author Jens Brønd
+ * @author Oscar Laurblad*/
+
 public class AfslutOrdreTest {
 
     @Test
@@ -34,8 +33,7 @@ public class AfslutOrdreTest {
         assertTrue(ctrl.getActiveOrders().size() == 1);
         ctrl.finishOrder();
 
-        
-        //assume
+        //assert
         assertTrue(ctrl.getActiveOrders().isEmpty());
     }
 }

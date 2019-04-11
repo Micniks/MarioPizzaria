@@ -10,12 +10,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
 
-/**
- * @author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurberg*/
+
 public class ControllerStartTest {
 
     @Test
@@ -33,7 +32,7 @@ public class ControllerStartTest {
         //act
         ctrl.start();
 
-        //assume
+        //assert
         assertTrue(ui.output.get(5).contains("Vælg en af følgende muligheder"));
         assertTrue(ui.output.get(6).contains("1. Vis menu"));
         assertTrue(ui.output.get(7).contains("2. Opret bestilling"));

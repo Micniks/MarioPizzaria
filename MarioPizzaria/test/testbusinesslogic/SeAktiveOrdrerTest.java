@@ -1,7 +1,6 @@
 package testbusinesslogic;
 
 import businesslogic.Controller;
-import businesslogic.DBFacade;
 import businesslogic.FakeFacade;
 import businesslogic.Pizza;
 import java.sql.SQLException;
@@ -10,18 +9,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
 
-/**
- * @author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurberg*/
+
 public class SeAktiveOrdrerTest {
 
     @Test
     public void testSeEnAktiveOrdrer() throws SQLException {
         //arrange
-
         ArrayList<Pizza> menukort = new ArrayList();
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
@@ -45,7 +42,6 @@ public class SeAktiveOrdrerTest {
     @Test
     public void testSeEnStorAktiveOrdrer() throws SQLException {
         //arrange
-
         ArrayList<Pizza> menukort = new ArrayList();
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));
@@ -71,7 +67,6 @@ public class SeAktiveOrdrerTest {
     @Test
     public void testSeToAktiveOrdrer() throws SQLException {
         //arrange
-
         ArrayList<Pizza> menukort = new ArrayList();
         menukort.add(new Pizza(1, "Vesuvio", 57.0, "tomatsauce, ost, skinke og oregano"));
         menukort.add(new Pizza(2, "Amerikaner", 53.0, "tomatsauce, ost, oksefars og oregano"));

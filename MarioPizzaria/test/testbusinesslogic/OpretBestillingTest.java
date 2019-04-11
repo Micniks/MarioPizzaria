@@ -3,20 +3,18 @@ package testbusinesslogic;
 import businesslogic.Pizza;
 import presentation.FakeUI;
 import businesslogic.Controller;
-import businesslogic.DBFacade;
 import businesslogic.FakeFacade;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import presentation.UI;
 
-/**
- * @author Michael N. Korsgaard
+
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurberg*/
+
 public class OpretBestillingTest {
 
     @Test

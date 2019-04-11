@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package testbusinesslogic;
 
+
 import businesslogic.Controller;
-import businesslogic.DBFacade;
 import businesslogic.FakeFacade;
 import businesslogic.Pizza;
 import java.sql.SQLException;
@@ -15,12 +10,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
 
-/**
- * @author Michael N. Korsgaard
+
+ /* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurberg*/
+
 public class SeHistorikTest {
 
     @Test
@@ -40,7 +35,7 @@ public class SeHistorikTest {
         ctrl.finishOrder();
         ctrl.displayHistory();
 
-         //assume
+         //assert
         assertTrue(ctrl.getActiveOrders().isEmpty());
         assertTrue(ui.output.get(20).contains("Historik"));
         assertTrue(ui.output.get(21).contains("OrdreNummer: 1"));
