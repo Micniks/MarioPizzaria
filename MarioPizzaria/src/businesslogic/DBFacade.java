@@ -20,9 +20,10 @@ public class DBFacade {
 
     private final Connection connect;
     private Statement statement;
+    private String serverTime = "serverTimezone=UTC";
 
     public DBFacade() throws SQLException {
-        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza", "root", "1234");
+        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza+?"+serverTime, "root", "1234");
         statement = connect.createStatement();
     }
 
