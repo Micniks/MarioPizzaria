@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package datasource;
 
 import businesslogic.Order;
@@ -15,10 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- *
- * @author Jens, Michael, Nicolai, Oscar
- */
+/* @author Michael N. Korsgaard
+ * @author Nicolai Gregersen
+ * @author Jens Brønd
+ * @author Oscar Laurberg*/
 public class DBFacade implements Facade {
 
     private final Connection connect;
@@ -74,7 +69,6 @@ public class DBFacade implements Facade {
             if (qtyList[pizza.getPizzaNumber() - 1] > 0) {
                 insertPizzaOrders(order, pizza, qtyList[pizza.getPizzaNumber() - 1]);
                 qtyList[pizza.getPizzaNumber() - 1] = 0;
-                //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
             }
         }
     }
@@ -170,12 +164,10 @@ public class DBFacade implements Facade {
         ResultSet pizzaPopularity = statement.executeQuery(sbQuery1.toString());
         
         ArrayList <String> pizzaName = new ArrayList();
-        //ArrayList <Integer> pizzaNo = new ArrayList();
         ArrayList <Integer> soldPizzas = new ArrayList();
         
         while (pizzaPopularity.next()){
             pizzaName.add(pizzaPopularity.getString("PizzaName"));
-           // pizzaNo.add(pizzaPopularity.getInt("PizzaNo"));
             soldPizzas.add(pizzaPopularity.getInt("Sold_Pizzas"));
         }
         sbStat.append("Pizza listet efter popularitet: ");
