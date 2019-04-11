@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -96,4 +97,15 @@ public class DBFacade {
         return al;
     }
 
+    public int readHighestOrderNo() throws SQLException {
+        ArrayList temp = new ArrayList();
+        ResultSet result = statement.executeQuery("SELECT * from Orders");
+        while (result.next()) {
+            temp.add(result.getInt("OrderNo"));
+        }
+        int highestOrderNo = (int) Collections.max(temp);
+        highestOrderNo++;
+        return highestOrderNo;
+
+    }
 }

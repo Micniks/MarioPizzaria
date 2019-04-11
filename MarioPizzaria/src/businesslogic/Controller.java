@@ -30,7 +30,7 @@ public class Controller {
         this.ui = ui;
         this.db = db;
         activeOrders = new ArrayList<Order>();
-        currentOrderNr = 1;
+        currentOrderNr = db.readHighestOrderNo();
         file = new FileFacade();
 
     }
