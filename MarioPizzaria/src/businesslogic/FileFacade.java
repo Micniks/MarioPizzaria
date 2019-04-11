@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +29,7 @@ public class FileFacade implements Facade {
     public FileFacade() {
 
         try {
-            fw = new FileWriter(orderHistory, false);
+            fw = new FileWriter(orderHistory, true);
             bufWriter = new BufferedWriter(fw);
             fr = new FileReader(orderHistory);
             bufReader = new BufferedReader(fr);
@@ -67,7 +68,25 @@ public class FileFacade implements Facade {
     @Override
     public int readHighestOrderNo() throws SQLException {
         //Write a method to find the highest order number from the files
-        return 1;
+        ArrayList<String> history = readHistory();
+        ArrayList<Integer> orderNumbers = new ArrayList();
+        int orderNo; 
+        int orderNumber;
+        for (String str : history){
+            if(str.contains("OrdreNummer: ")){
+                String[] orderString;
+                orderString = str.split(" ");
+                orderNumber = Integer.parseInt(orderString[1]);
+                orderNumbers.add(orderNumber);
+            }
+        }
+        if (!orderNumbers.isEmpty()){
+            orderNo = (int) Collections.max(orderNumbers);
+            orderNo++;
+        } else {
+            orderNo = 1;
+        }
+        return orderNo;
     }
 
     @Override
