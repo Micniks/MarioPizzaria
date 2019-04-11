@@ -156,16 +156,16 @@ public class DBFacade implements Facade {
 
     @Override
     public String readStatistics() throws SQLException {
-        StringBuilder sb = new StringBuilder();
-        sb.append("SELECT PizzaName, pizza_orders.PizzaNo, sum(Quantity) as Sold_Pizzas from pizza_orders ");
-        sb.append("join Orders ");
-        sb.append("on pizza_orders.OrderNo = orders.OrderNo ");
-        sb.append("join pizza ");
-        sb.append("on pizza.PizzaNo = pizza_orders.PizzaNo ");
-        sb.append("group by PizzaNo ");
-        sb.append("order by Sold_Pizzas desc");
-        ResultSet pizzaPopularity = statement.executeQuery(sb.toString());
-        sb.delete(0,sb.length());
+        StringBuilder sbStat = new StringBuilder();
+        StringBuilder sbQuery1 = new StringBuilder();
+        sbQuery1.append("SELECT PizzaName, pizza_orders.PizzaNo, sum(Quantity) as Sold_Pizzas from pizza_orders ");
+        sbQuery1.append("join Orders ");
+        sbQuery1.append("on pizza_orders.OrderNo = orders.OrderNo ");
+        sbQuery1.append("join pizza ");
+        sbQuery1.append("on pizza.PizzaNo = pizza_orders.PizzaNo ");
+        sbQuery1.append("group by PizzaNo ");
+        sbQuery1.append("order by Sold_Pizzas desc");
+        ResultSet pizzaPopularity = statement.executeQuery(sbQuery1.toString());
         
         ArrayList <String> pizzaName = new ArrayList();
         //ArrayList <Integer> pizzaNo = new ArrayList();
@@ -176,20 +176,45 @@ public class DBFacade implements Facade {
            // pizzaNo.add(pizzaPopularity.getInt("PizzaNo"));
             soldPizzas.add(pizzaPopularity.getInt("Sold_Pizzas"));
         }
-        sb.append("Pizza listet efter popularitet: ");
-        sb.append("\n");
+        sbStat.append("Pizza listet efter popularitet: ");
+        sbStat.append("\n");
         int count = 1;
         for (int i = 0; pizzaName.size() > i; i++){
-          sb.append(count++);  
-          sb.append(". ");
-          sb.append(pizzaName.get(i));
-          sb.append(", ");
-          sb.append(soldPizzas.get(i));
-          sb.append(" solgte.");
-          sb.append("\n");
+          sbStat.append(count++);  
+          sbStat.append(". ");
+          sbStat.append(pizzaName.get(i));
+          sbStat.append(", ");
+          sbStat.append(soldPizzas.get(i));
+          sbStat.append(" solgte.");
+          sbStat.append("\n");
           
         }
         
-        return sb.toString();
+        sbStat.append("\n \n \n");
+        sbStat.append("Timer listet efter travlhed:");
+        sbStat.append("\n");
+        
+        StringBuilder sbQuery2 = new StringBuilder();
+        sbQuery2.append("SELECT date_format( pickup_time, '%H' ) as Hour, ");
+        sbQuery2.append("count(*) as Order_Qty ");
+        sbQuery2.append("from orders ");
+        sbQuery2.append("group by Hour ");
+        sbQuery2.append("order by Order_Qty desc");
+        ResultSet busyHours = statement.executeQuery(sbQuery2.toString());
+        ArrayList hour = new ArrayList();
+        ArrayList orderQty = new ArrayList();
+        
+        while (busyHours.next()){
+            hour.add(busyHours.getInt("Hour"));
+            orderQty.add(busyHours.getInt("Order_Qty"));
+        }
+        for (int i = 0; i < hour.size(); i++){
+            sbStat.append("kl. ");
+            sbStat.append(hour.get(i));
+            sbStat.append(", antal ordrer: ");
+            sbStat.append(orderQty.get(i));
+            sbStat.append("\n");
+        }
+        return sbStat.toString();
     }
 }
