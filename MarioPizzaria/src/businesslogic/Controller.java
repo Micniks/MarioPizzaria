@@ -141,6 +141,7 @@ public class Controller {
                     for (Pizza pizza : tempList) {
                         if (qtyList[pizza.getPizzaNumber()-1] > 0) {
                             db.insertPizzaOrders(activeOrders.get(index),pizza,qtyList[pizza.getPizzaNumber()-1] );
+                            qtyList[pizza.getPizzaNumber()-1] = 0;
                             //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
                         }
                     }
