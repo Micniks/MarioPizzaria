@@ -5,12 +5,11 @@ import businesslogic.Pizza;
 import presentation.UI;
 import java.util.ArrayList;
 
-/**
- * @author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurblad*/
+
 public class FakeUI implements UI {
 
     private int index = 0;

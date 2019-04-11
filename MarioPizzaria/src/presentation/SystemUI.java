@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import presentation.UI;
 import java.util.Scanner;
 
-/**
- *
- * @author Michael N. Korsgaard
+/* @author Michael N. Korsgaard
  * @author Nicolai Gregersen
  * @author Jens Brønd
- * @author Oscar Laurberg
- */
+ * @author Oscar Laurblad*/
+
 public class SystemUI implements UI {
 
     Scanner scan = new Scanner(System.in);
