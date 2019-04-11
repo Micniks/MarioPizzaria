@@ -119,7 +119,7 @@ public class Controller {
 
     }
 
-    public void finishOrder() throws SQLException{
+    public void finishOrder() throws SQLException {
         Order currentOrdre = null;
         int index = 0;
         int ordreNummer = ui.selectOrder();
@@ -127,35 +127,35 @@ public class Controller {
         ArrayList<Pizza> tempList = activeOrders.get(index).getPizzaList();
         int[] qtyList = new int[menu.size()];
 //        try {
-            while (temp) {
-                if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
-                    //læg i historik
-                    //file.archiveOrder(activeOrders.get(index));
-                    double price = 0;
-                    int qty = 0;
-                    for (Pizza pizza : tempList) {
-                        price += pizza.getPrice();
-                        qtyList[pizza.getPizzaNumber() - 1]++;
-                    }
-                    db.insertOrders(activeOrders.get(index), price);
-                    for (Pizza pizza : tempList) {
-                        if (qtyList[pizza.getPizzaNumber()-1] > 0) {
-                            db.insertPizzaOrders(activeOrders.get(index),pizza,qtyList[pizza.getPizzaNumber()-1] );
-                            qtyList[pizza.getPizzaNumber()-1] = 0;
-                            //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
-                        }
-                    }
-                    activeOrders.remove(index);
-
-                    temp = false;
-
-                } else {
-                    index++;
+        while (temp) {
+            if (activeOrders.get(index).getOrderNumber() == ordreNummer) {
+                //læg i historik
+                //file.archiveOrder(activeOrders.get(index));
+                double price = 0;
+                int qty = 0;
+                for (Pizza pizza : tempList) {
+                    price += pizza.getPrice();
+                    qtyList[pizza.getPizzaNumber() - 1]++;
                 }
+                db.insertOrders(activeOrders.get(index), price);
+                for (Pizza pizza : tempList) {
+                    if (qtyList[pizza.getPizzaNumber() - 1] > 0) {
+                        db.insertPizzaOrders(activeOrders.get(index), pizza, qtyList[pizza.getPizzaNumber() - 1]);
+                        qtyList[pizza.getPizzaNumber() - 1] = 0;
+                        //db.insert("('PizzaName', 123)", "Pizza", "(PizzaName, PizzaPrice)");
+                    }
+                }
+                activeOrders.remove(index);
+
+                temp = false;
+
+            } else {
+                index++;
             }
+        }
 
     }
-    
+
     public void displayHistory() {
         ui.displayHistory(file.readHistory());
         ui.pressAnyKey();
@@ -169,6 +169,7 @@ public class Controller {
         try {
             while (temp) {
                 if (activeOrders.get(index).getOrderNumber() == orderNumber) {
+                    System.out.println(activeOrders.get(index) + "er blevet annulleret");
                     activeOrders.remove(index);
                     temp = false;
                 } else {
