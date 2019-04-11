@@ -23,9 +23,18 @@ public class SystemUI implements UI {
 
     @Override
     public int selectPizza() {
-        System.out.println("Skriv hvilket pizzanummer kunden har bestilt: ");
-        int pizzaValg = scan.nextInt();
-        scan.nextLine();
+        int pizzaValg = 0;
+        boolean pizzaChoice = false;
+        while (!pizzaChoice) {
+            try {
+                System.out.println("Skriv hvilket pizzanummer kunden har bestilt: ");
+                pizzaValg = Integer.parseInt(scan.nextLine());
+                pizzaChoice = true;
+            }
+            catch (Exception E) {
+                System.out.println("Du har vidst tastet forkert.. Prøve igen.");
+            }
+        }
         return pizzaValg;
     }
 
@@ -162,5 +171,5 @@ public class SystemUI implements UI {
     public void showStatistics(String readStatistics) {
         System.out.println(readStatistics);
     }
-    
+
 }

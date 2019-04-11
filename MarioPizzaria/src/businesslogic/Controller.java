@@ -52,8 +52,8 @@ public class Controller {
         //Opret pizza-ordre
         Order order = new Order(currentOrderNr);
         Boolean morePizza = true;
-        try {
-            do {
+            while (morePizza) {
+                try {
                 //vælg pizza at bestille
                 int pizzaNumber = ui.selectPizza();
                 Pizza pizza = menu.get(pizzaNumber - 1);
@@ -66,15 +66,16 @@ public class Controller {
 
                 //vælg om der skal bestilles andre pizzaer
                 morePizza = ui.selectMorePizza();
-            } while (morePizza);
+                } catch (Exception e) {
+                    System.out.println("Du indtastede ikke et gældende pizzanummer. Prøv igen.");
+                }
+            }
             activeOrders.add(order);
             ui.displayOrderNumber(currentOrderNr);
             ui.showPizzaListSelection((order.getPizzaList()));
             currentOrderNr++;
 
-        } catch (Exception e) {
-            System.out.println("Du indtastede ikke et gældende pizzanummer. Du returneres nu til hovedmenuen.");
-        }
+        
     }
 
     public ArrayList<Order> getActiveOrders() {
@@ -159,6 +160,7 @@ public class Controller {
                 } else {
                     index++;
                 }
+                
             }
         } catch (Exception e) {
             System.out.println("Du indtastede ikke et aktivt ordrenummer.\nDu returneres til hovedmenuen.");
