@@ -1,9 +1,9 @@
 package main;
 
 import businesslogic.Controller;
-import businesslogic.DBFacade;
-import businesslogic.Facade;
-import businesslogic.FileFacade;
+import datasource.DBFacade;
+import datasource.Facade;
+import datasource.FileFacade;
 import businesslogic.Menu;
 import java.sql.SQLException;
 import presentation.SystemUI;
