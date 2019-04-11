@@ -2,6 +2,7 @@ package testbusinesslogic;
 
 import businesslogic.Controller;
 import businesslogic.Pizza;
+import businesslogic.DBFacade;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ public class AfslutOrdreTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "2", "AnyKey", "1"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();

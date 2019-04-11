@@ -3,6 +3,7 @@ package testbusinesslogic;
 import businesslogic.Pizza;
 import presentation.FakeUI;
 import businesslogic.Controller;
+import businesslogic.DBFacade;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.Test;
@@ -25,7 +26,8 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();
@@ -49,7 +51,8 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "2", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();
@@ -74,7 +77,8 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "1", "1", "1", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();
@@ -102,7 +106,8 @@ public class OpretBestillingTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "2", "Anykey", "1", "1", "2", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();

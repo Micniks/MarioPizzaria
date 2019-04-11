@@ -1,6 +1,7 @@
 package testbusinesslogic;
 
 import businesslogic.Controller;
+import businesslogic.DBFacade;
 import businesslogic.Pizza;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class SeAktiveOrdrerTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "2", "AnyKey", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();
@@ -49,7 +51,8 @@ public class SeAktiveOrdrerTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "1", "1", "3", "1", "3", "2", "2", "AnyKey", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();
@@ -74,7 +77,8 @@ public class SeAktiveOrdrerTest {
         menukort.add(new Pizza(3, "Cacciatore", 57.0, "tomatsauce, ost, pepperoni og oregano"));
         String[] input = {"2", "1", "2", "AnyKey", "1", "1", "2", "AnyKey", "AnyKey"};
         FakeUI ui = new FakeUI(input);
-        Controller ctrl = new Controller(ui, menukort);
+        DBFacade db = new DBFacade(ui.getPassword());
+        Controller ctrl = new Controller(ui, menukort, db);
 
         //act
         ctrl.newOrder();
