@@ -27,6 +27,11 @@ public class FakeFacade implements Facade {
     public int readHighestOrderNo() throws SQLException {
         return 1;
     }
+
+    @Override
+    public String readStatistics() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

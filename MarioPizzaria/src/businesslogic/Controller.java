@@ -110,7 +110,10 @@ public class Controller {
                 case "6":
                     displayHistory();
                     break;
-                case "7":
+                case "7": 
+                    displayStatistics();
+                    break;
+                case "8":
                     quit = true;
                     break;
                 default:
@@ -167,6 +170,11 @@ public class Controller {
 
             ui.displayOrders(order);
         }
+        ui.pressAnyKey();
+    }
+
+    private void displayStatistics() throws SQLException {
+        ui.showStatistics(facade.readStatistics());
         ui.pressAnyKey();
     }
 

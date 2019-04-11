@@ -59,7 +59,8 @@ public class SystemUI implements UI {
         System.out.println("4. Afslut bestilling");
         System.out.println("5. Annullere en bestilling");
         System.out.println("6. Se historik");
-        System.out.println("7. Afslut program");
+        System.out.println("7. Vis statistik");
+        System.out.println("8. Afslut program");
     }
 
     @Override
@@ -155,6 +156,11 @@ public class SystemUI implements UI {
         answer = scan.nextInt();
         scan.nextLine();
         return answer;
+    }
+
+    @Override
+    public void showStatistics(String readStatistics) {
+        System.out.println(readStatistics);
     }
     
 }

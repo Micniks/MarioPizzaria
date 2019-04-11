@@ -153,4 +153,43 @@ public class DBFacade implements Facade {
         }
         return history;
     }
+
+    @Override
+    public String readStatistics() throws SQLException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT PizzaName, pizza_orders.PizzaNo, sum(Quantity) as Sold_Pizzas from pizza_orders ");
+        sb.append("join Orders ");
+        sb.append("on pizza_orders.OrderNo = orders.OrderNo ");
+        sb.append("join pizza ");
+        sb.append("on pizza.PizzaNo = pizza_orders.PizzaNo ");
+        sb.append("group by PizzaNo ");
+        sb.append("order by Sold_Pizzas desc");
+        ResultSet pizzaPopularity = statement.executeQuery(sb.toString());
+        sb.delete(0,sb.length());
+        
+        ArrayList <String> pizzaName = new ArrayList();
+        //ArrayList <Integer> pizzaNo = new ArrayList();
+        ArrayList <Integer> soldPizzas = new ArrayList();
+        
+        while (pizzaPopularity.next()){
+            pizzaName.add(pizzaPopularity.getString("PizzaName"));
+           // pizzaNo.add(pizzaPopularity.getInt("PizzaNo"));
+            soldPizzas.add(pizzaPopularity.getInt("Sold_Pizzas"));
+        }
+        sb.append("Pizza listet efter popularitet: ");
+        sb.append("\n");
+        int count = 1;
+        for (int i = 0; pizzaName.size() > i; i++){
+          sb.append(count++);  
+          sb.append(". ");
+          sb.append(pizzaName.get(i));
+          sb.append(", ");
+          sb.append(soldPizzas.get(i));
+          sb.append(" solgte.");
+          sb.append("\n");
+          
+        }
+        
+        return sb.toString();
+    }
 }

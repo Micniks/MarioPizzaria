@@ -3,7 +3,6 @@ package businesslogic;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -69,6 +68,11 @@ public class FileFacade implements Facade {
     public int readHighestOrderNo() throws SQLException {
         //Write a method to find the highest order number from the files
         return 1;
+    }
+
+    @Override
+    public String readStatistics() throws SQLException {
+        return "Statistik ikke undersøttet i fil-modulet endnu";
     }
 
 }

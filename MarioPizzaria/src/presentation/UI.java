@@ -31,5 +31,7 @@ public interface UI {
     public void cancelOrderMsg(Order order);
     public String getPassword();
     public int askFacade();
+
+    public void showStatistics(String readStatistics);
     
 }
